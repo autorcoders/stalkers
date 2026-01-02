@@ -93,8 +93,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 40px;
-            color: white;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .gift-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
         
         .gift-name {
@@ -170,19 +176,15 @@
             justify-content: center;
         }
         
-        /* Цвета для изображений подарков */
-        .ramen-color { background: linear-gradient(45deg, #FF9800, #FF5722); }
-        .candle-color { background: linear-gradient(45deg, #FF4081, #E91E63); }
-        .hat-color { background: linear-gradient(45deg, #9C27B0, #673AB7); }
-        .charm-color { background: linear-gradient(45deg, #E91E63, #F44336); }
-        .cookie-color { background: linear-gradient(45deg, #FF9800, #FFC107); }
-        .pendant-color { background: linear-gradient(45deg, #2196F3, #03A9F4); }
-        .brownie-color { background: linear-gradient(45deg, #795548, #8D6E63); }
-        .cupcake-color { background: linear-gradient(45deg, #FF4081, #E91E63); }
-        .ufc-color { background: linear-gradient(45deg, #FF9800, #FF5722); }
-        .star-color { background: linear-gradient(45deg, #FFC107, #FF9800); }
-        .jester-color { background: linear-gradient(45deg, #9C27B0, #3F51B5); }
-        .cigar-color { background: linear-gradient(45deg, #607D8B, #9E9E9e); }
+        .image-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 40px;
+        }
         
         /* Стили для страницы "Мои подарки" */
         .empty-inventory {
@@ -1046,28 +1048,28 @@
     </nav>
     
     <script>
-        // Данные о подарках из изображения
+        // Данные о подарках из изображения с расширением .jpg
         const gifts = [
-            { name: "Instant Ramen", id: "11072", colorClass: "ramen-color" },
-            { name: "B-Day Candle", id: "10848", colorClass: "candle-color" },
-            { name: "Instant Ramen", id: "20887", colorClass: "ramen-color" },
-            { name: "Top Hat", id: "25697", colorClass: "hat-color" },
-            { name: "Cupid Charm", id: "9221", colorClass: "charm-color" },
-            { name: "Cookie Heart", id: "13920", colorClass: "cookie-color" },
-            { name: "Top Hat", id: "4261", colorClass: "hat-color" },
-            { name: "Moon Pendant", id: "25068", colorClass: "pendant-color" },
-            { name: "Cupid Charm", id: "9772", colorClass: "charm-color" },
-            { name: "Cupid Charm", id: "9772", colorClass: "charm-color" },
-            { name: "Happy Brownie", id: "12527", colorClass: "brownie-color" },
-            { name: "Whip Cupcake", id: "15071", colorClass: "cupcake-color" },
-            { name: "Instant Ramen", id: "16237", colorClass: "ramen-color" },
-            { name: "UFC Strike", id: "8222", colorClass: "ufc-color" },
-            { name: "Hanging Star", id: "1057", colorClass: "star-color" },
-            { name: "Jester Hat", id: "11962", colorClass: "jester-color" },
-            { name: "Cookie Heart", id: "10258", colorClass: "cookie-color" },
-            { name: "Snoop Cigar", id: "70836", colorClass: "cigar-color" },
-            { name: "Cupid Charm", id: "9731", colorClass: "charm-color" },
-            { name: "Cupid Charm", id: "9501", colorClass: "charm-color" }
+            { name: "B-Day Candle", id: "10848", image: "B-Day Candle.jpg" },
+            { name: "Cookie Heart", id: "13920", image: "Cookie Heart.jpg" },
+            { name: "Cookie Heart", id: "10258", image: "Cookie Heart2.jpg" },
+            { name: "Cupid Charm", id: "9221", image: "Cupid Charm.jpg" },
+            { name: "Cupid Charm", id: "9772", image: "Cupid Charm2.jpg" },
+            { name: "Cupid Charm", id: "9772", image: "Cupid Charm3.jpg" },
+            { name: "Cupid Charm", id: "9731", image: "Cupid Charm4.jpg" },
+            { name: "Cupid Charm", id: "9501", image: "Cupid Charm5.jpg" },
+            { name: "Hanging Star", id: "1057", image: "Hanging Star.jpg" },
+            { name: "Happy Brownie", id: "12527", image: "Happy Brownie.jpg" },
+            { name: "Instant Ramen", id: "11072", image: "Instant Ramen.jpg" },
+            { name: "Instant Ramen", id: "20887", image: "Instant Ramen2.jpg" },
+            { name: "Instant Ramen", id: "16237", image: "Instant Ramen3.jpg" },
+            { name: "Jester Hat", id: "11962", image: "Jester Hat.jpg" },
+            { name: "Moon Pendant", id: "25068", image: "Moon Pendant.jpg" },
+            { name: "Snoop Cigar", id: "70836", image: "Snoop Cigar.jpg" },
+            { name: "Top Hat", id: "25697", image: "Top Hat.jpg" },
+            { name: "Top Hat", id: "4261", image: "Top Hat2.jpg" },
+            { name: "UFC Strike", id: "8222", image: "UFC Strike.jpg" },
+            { name: "Whip Cupcake", id: "15071", image: "Whip Cupcake.jpg" }
         ];
         
         // Баланс пользователя в TON
@@ -1090,8 +1092,8 @@
                 giftCard.className = 'gift-card';
                 
                 giftCard.innerHTML = `
-                    <div class="gift-image ${gift.colorClass}">
-                        <!-- Пустое изображение - только фон -->
+                    <div class="gift-image">
+                        <img src="images/${gift.image}" alt="${gift.name}" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'image-placeholder\'><i class=\'fas fa-gift\'></i></div>';">
                     </div>
                     <div class="gift-name">${gift.name}</div>
                     <div class="gift-id">#${gift.id}</div>
