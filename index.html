@@ -1091,9 +1091,10 @@
                 const giftCard = document.createElement('div');
                 giftCard.className = 'gift-card';
                 
+                // Изменено: изображения загружаются из той же папки, без подпапки images/
                 giftCard.innerHTML = `
                     <div class="gift-image">
-                        <img src="images/${gift.image}" alt="${gift.name}" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'image-placeholder\'><i class=\'fas fa-gift\'></i></div>';">
+                        <img src="${gift.image}" alt="${gift.name}" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'image-placeholder\'><i class=\'fas fa-gift\'></i></div>';">
                     </div>
                     <div class="gift-name">${gift.name}</div>
                     <div class="gift-id">#${gift.id}</div>
